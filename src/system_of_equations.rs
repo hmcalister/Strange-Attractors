@@ -21,7 +21,10 @@ pub struct CameraPosition {
 }
 
 pub fn map_user_selection_to_system(selection: i32) -> SystemOfEquations {
-    let mapper: HashMap<i32, SystemOfEquations> = HashMap::from([(0, LORENTZ_SYSTEM)]);
+    let mapper: HashMap<i32, SystemOfEquations> = HashMap::from([
+        (0, LORENTZ_SYSTEM),
+        (1, AIZAWA_SYSTEM),
+    ]);
 
     mapper[&selection]
 }
@@ -43,4 +46,31 @@ const LORENTZ_SYSTEM: SystemOfEquations = SystemOfEquations {
         y: 0.0,
         z: 30.0,
     },
+};};
+
+/// Constants taken from https://www.cedrick.ai/posts/attractors.html
+const AIZAWA_A: f32 = 0.95;
+const AIZAWA_B: f32 = 0.7;
+const AIZAWA_C: f32 = 0.65;
+const AIZAWA_D: f32 = 3.5;
+const AIZAWA_E: f32 = 0.25;
+const AIZAWA_F: f32 = 0.1;
+const AIZAWA_SYSTEM: SystemOfEquations = SystemOfEquations {
+    dx: |x, y, z| (z - AIZAWA_B) * x - AIZAWA_D * y,
+    dy: |x, y, z| AIZAWA_D * x + (z - AIZAWA_B) * y,
+    dz: |x, y, z| {
+        AIZAWA_C + AIZAWA_A * z - z.powi(3) / 3.0 - (x.powi(2) - y.powi(2)) * (1.0 + AIZAWA_E * z)
+            + AIZAWA_F * z * x.powi(3)
+    },
+    init_camera_position: CameraPosition {
+        x: 2.0,
+        y: 0.1,
+        z: 20.0,
+    },
+    init_camera_look_at: CameraPosition {
+        x: 0.0,
+        y: 0.0,
+        z: 0.0,
+    },
 };
+

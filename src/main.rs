@@ -33,6 +33,7 @@ struct Args {
     /// Options include:
     ///
     /// * 0: Lorentz
+    /// * 1: Aizawa
     #[arg(short, long, default_value_t=0)]
     system: i32,
 }
