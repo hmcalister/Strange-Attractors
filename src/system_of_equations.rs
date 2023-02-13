@@ -26,6 +26,7 @@ pub fn map_user_selection_to_system(selection: i32) -> SystemOfEquations {
         (0, LORENTZ_SYSTEM),
         (1, AIZAWA_SYSTEM),
         (2, THOMAS_CYCLICAL),
+        (3, HALVORSEN),
     ]);
 
     mapper[&selection]
@@ -96,3 +97,23 @@ const THOMAS_CYCLICAL: SystemOfEquations = SystemOfEquations {
         z: 0.0,
     },
 };
+
+/// Constants and equations from https://www.dynamicmath.xyz/strange-attractors/
+const HALVORSEN_ALPHA: f32 = 1.89;
+const HALVORSEN: SystemOfEquations = SystemOfEquations {
+    time_scale: 100.0,
+    dx: |x, y, z| -HALVORSEN_ALPHA * x - 4.0 * y - 4.0 * z - y.powi(2),
+    dy: |x, y, z| -HALVORSEN_ALPHA * y - 4.0 * z - 4.0 * x - z.powi(2),
+    dz: |x, y, z| -HALVORSEN_ALPHA * z - 4.0 * x - 4.0 * y - x.powi(2),
+    init_camera_position: CameraPosition {
+        x: 15.0,
+        y: 10.0,
+        z: 2.0,
+    },
+    init_camera_look_at: CameraPosition {
+        x: -2.0,
+        y: -2.0,
+        z: -2.0,
+    },
+};
+

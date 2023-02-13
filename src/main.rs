@@ -37,6 +37,8 @@ struct Args {
     /// * 1: Aizawa
     /// 
     /// * 2: Thomas Cyclical
+    /// 
+    /// * 3: Halvorsen
     #[arg(short, long, default_value_t=0)]
     system: i32,
 }
