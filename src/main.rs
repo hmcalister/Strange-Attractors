@@ -19,7 +19,7 @@ use kiss3d::window::Window;
 #[command(author, version, about, long_about = None)]
 struct Args {
     /// Number of spheres to add to the simulation
-    #[arg(short, long, default_value_t=1000)]
+    #[arg(short, long, default_value_t=5000)]
     num_points: usize,
 
     /// Starting random position scale for simulation points.
@@ -33,7 +33,9 @@ struct Args {
     /// Options include:
     ///
     /// * 0: Lorentz
+    /// 
     /// * 1: Aizawa
+    /// 
     /// * 2: Thomas Cyclical
     #[arg(short, long, default_value_t=0)]
     system: i32,
@@ -45,9 +47,9 @@ fn main() {
 
     let mut rng = thread_rng();
     let position_dist = rand_distr::Uniform::from(-args.initial_position_scale..args.initial_position_scale);
-    let color_red_dist = rand_distr::Uniform::from(0.4..0.6);
-    let color_green_dist = rand_distr::Uniform::from(0.75..0.95);
-    let color_blue_dist = rand_distr::Uniform::from(0.7..0.9);
+    let color_red_dist = rand_distr::Uniform::from(0.6..0.95);
+    let color_green_dist = rand_distr::Uniform::from(0.35..0.40);
+    let color_blue_dist = rand_distr::Uniform::from(0.6..0.95);
 
 
     let mut window = Window::new("Strange Attractors");
