@@ -34,6 +34,7 @@ struct Args {
     ///
     /// * 0: Lorentz
     /// * 1: Aizawa
+    /// * 2: Thomas Cyclical
     #[arg(short, long, default_value_t=0)]
     system: i32,
 }

@@ -25,6 +25,7 @@ pub fn map_user_selection_to_system(selection: i32) -> SystemOfEquations {
     let mapper: HashMap<i32, SystemOfEquations> = HashMap::from([
         (0, LORENTZ_SYSTEM),
         (1, AIZAWA_SYSTEM),
+        (2, THOMAS_CYCLICAL),
     ]);
 
     mapper[&selection]
@@ -48,7 +49,7 @@ const LORENTZ_SYSTEM: SystemOfEquations = SystemOfEquations {
         y: 0.0,
         z: 30.0,
     },
-};};
+};
 
 /// Constants taken from https://www.cedrick.ai/posts/attractors.html
 const AIZAWA_A: f32 = 0.95;
@@ -77,3 +78,21 @@ const AIZAWA_SYSTEM: SystemOfEquations = SystemOfEquations {
     },
 };
 
+// Consts and equations taken from https://www.cedrick.ai/posts/attractors.html
+const THOMAS_CYCLICAL_B: f32 = 0.208186;
+const THOMAS_CYCLICAL: SystemOfEquations = SystemOfEquations {
+    time_scale: 10.0,
+    dx: |x, y, z| y.sin() - THOMAS_CYCLICAL_B * x,
+    dy: |x, y, z| z.sin() - THOMAS_CYCLICAL_B * y,
+    dz: |x, y, z| x.sin() - THOMAS_CYCLICAL_B * z,
+    init_camera_position: CameraPosition {
+        x: -10.0,
+        y: 5.0,
+        z: 8.0,
+    },
+    init_camera_look_at: CameraPosition {
+        x: 0.0,
+        y: 0.0,
+        z: 0.0,
+    },
+};
