@@ -1,0 +1,13 @@
+[package]
+name = "strange_attractors"
+version = "0.1.0"
+edition = "2021"
+
+# See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
+
+[dependencies]
+clap = { version = "4.1.4", features = ["derive"] }
+kiss3d = "0.35.0"
+nalgebra = "0.32.1"
+rand = "0.8.5"
+rand_distr = "0.4.3"
