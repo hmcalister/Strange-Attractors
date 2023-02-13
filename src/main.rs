@@ -39,6 +39,8 @@ struct Args {
     /// * 2: Thomas Cyclical
     /// 
     /// * 3: Halvorsen
+    /// 
+    /// * 4: Four Wing
     #[arg(short, long, default_value_t=0)]
     system: i32,
 }
@@ -90,8 +92,6 @@ fn main() {
             z: z,
         });
     }
-
-
 
     while window.render_with_camera(&mut camera) {
         x_axis.draw_axis(&mut window);
