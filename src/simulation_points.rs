@@ -11,10 +11,9 @@ pub struct SimulationPoint {
 
 impl SimulationPoint {
     pub fn update(self: &mut SimulationPoint, system: &SystemOfEquations) {
-        const TIME_SCALE: f32 = 100.0;
-        self.x += (system.dx)(self.x,self.y,self.z)/TIME_SCALE;
-        self.y += (system.dy)(self.x,self.y,self.z)/TIME_SCALE;
-        self.z += (system.dz)(self.x,self.y,self.z)/TIME_SCALE;
+        self.x += (system.dx)(self.x,self.y,self.z)/system.time_scale;
+        self.y += (system.dy)(self.x,self.y,self.z)/system.time_scale;
+        self.z += (system.dz)(self.x,self.y,self.z)/system.time_scale;
 
         self.scene_node.set_local_translation(Translation3::new(self.x, self.y,self.z));
     }

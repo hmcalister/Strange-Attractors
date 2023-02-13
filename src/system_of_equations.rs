@@ -6,6 +6,7 @@ use std::collections::HashMap;
 
 #[derive(Clone, Copy)]
 pub struct SystemOfEquations {
+    pub time_scale: f32,
     pub dx: fn(f32, f32, f32) -> f32,
     pub dy: fn(f32, f32, f32) -> f32,
     pub dz: fn(f32, f32, f32) -> f32,
@@ -33,6 +34,7 @@ const LORENTZ_RHO: f32 = 28.0;
 const LORENTZ_SIGMA: f32 = 10.0;
 const LORENTZ_BETA: f32 = 8.0 / 3.0;
 const LORENTZ_SYSTEM: SystemOfEquations = SystemOfEquations {
+    time_scale: 100.0,
     dx: |x, y, z| LORENTZ_SIGMA * (y - x),
     dy: |x, y, z| x * (LORENTZ_RHO - z) - y,
     dz: |x, y, z| x * y - LORENTZ_BETA * z,
@@ -56,6 +58,7 @@ const AIZAWA_D: f32 = 3.5;
 const AIZAWA_E: f32 = 0.25;
 const AIZAWA_F: f32 = 0.1;
 const AIZAWA_SYSTEM: SystemOfEquations = SystemOfEquations {
+    time_scale: 50.0,
     dx: |x, y, z| (z - AIZAWA_B) * x - AIZAWA_D * y,
     dy: |x, y, z| AIZAWA_D * x + (z - AIZAWA_B) * y,
     dz: |x, y, z| {
