@@ -26,6 +26,8 @@ pub fn map_user_selection_to_system(selection: i32) -> SystemOfEquations {
         (0, LORENTZ_SYSTEM),
         (1, AIZAWA_SYSTEM),
         (2, THOMAS_CYCLICAL),
+        (3, HALVORSEN),
+        (4, FOUR_WING),
     ]);
 
     mapper[&selection]
@@ -89,6 +91,46 @@ const THOMAS_CYCLICAL: SystemOfEquations = SystemOfEquations {
         x: -10.0,
         y: 5.0,
         z: 8.0,
+    },
+    init_camera_look_at: CameraPosition {
+        x: 0.0,
+        y: 0.0,
+        z: 0.0,
+    },
+};
+
+/// Constants and equations from https://www.dynamicmath.xyz/strange-attractors/
+const HALVORSEN_ALPHA: f32 = 1.89;
+const HALVORSEN: SystemOfEquations = SystemOfEquations {
+    time_scale: 100.0,
+    dx: |x, y, z| -HALVORSEN_ALPHA * x - 4.0 * y - 4.0 * z - y.powi(2),
+    dy: |x, y, z| -HALVORSEN_ALPHA * y - 4.0 * z - 4.0 * x - z.powi(2),
+    dz: |x, y, z| -HALVORSEN_ALPHA * z - 4.0 * x - 4.0 * y - x.powi(2),
+    init_camera_position: CameraPosition {
+        x: 15.0,
+        y: 10.0,
+        z: 2.0,
+    },
+    init_camera_look_at: CameraPosition {
+        x: -2.0,
+        y: -2.0,
+        z: -2.0,
+    },
+};
+
+/// Constants and equations from https://www.dynamicmath.xyz/strange-attractors/
+const FOUR_WING_A: f32 = 0.2;
+const FOUR_WING_B: f32 = 0.01;
+const FOUR_WING_C: f32 = -0.4;
+const FOUR_WING: SystemOfEquations = SystemOfEquations {
+    time_scale: 20.0,
+    dx: |x, y, z| FOUR_WING_A * x + y * z,
+    dy: |x, y, z| FOUR_WING_B * x + FOUR_WING_C * y - x * z,
+    dz: |x, y, z| -z - x * y,
+    init_camera_position: CameraPosition {
+        x: 3.0,
+        y: 5.0,
+        z: 10.0,
     },
     init_camera_look_at: CameraPosition {
         x: 0.0,
