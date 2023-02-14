@@ -88,7 +88,7 @@ const THOMAS_CYCLICAL: SystemOfEquations = SystemOfEquations {
     dy: |x, y, z| z.sin() - THOMAS_CYCLICAL_B * y,
     dz: |x, y, z| x.sin() - THOMAS_CYCLICAL_B * z,
     init_camera_position: CameraPosition {
-        x: -10.0,
+        x: -4.0,
         y: 5.0,
         z: 8.0,
     },

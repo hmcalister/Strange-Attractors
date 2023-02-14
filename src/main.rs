@@ -18,6 +18,14 @@ use kiss3d::window::Window;
 #[derive(Parser)]
 #[command(author, version, about, long_about = None)]
 struct Args {
+    /// Set the screen width
+    #[arg(long, default_value_t=1000)]
+    screen_width: u32,
+
+    /// Set the screen height
+    #[arg(long, default_value_t=800)]
+    screen_height: u32,
+
     /// Number of spheres to add to the simulation
     #[arg(short, long, default_value_t=5000)]
     num_points: usize,
@@ -56,7 +64,7 @@ fn main() {
     let color_blue_dist = rand_distr::Uniform::from(0.6..0.95);
 
 
-    let mut window = Window::new("Strange Attractors");
+    let mut window = Window::new_with_size("Strange Attractors", args.screen_width,args.screen_height);
     let mut camera = ArcBall::new(
         Point3::new(
             system.init_camera_position.x,
