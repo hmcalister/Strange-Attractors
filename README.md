@@ -1,6 +1,8 @@
 # Strange Attractors
 #### Author: Hayden McAlister
 
+![An example of the project running, showing a strange attractor](images/example.gif)
+
 This is a small project to explore some dynamic systems and visualize some strange attractors. The project uses Rust with [kiss3d](https://docs.rs/kiss3d/latest/kiss3d/index.html) as a graphics backend. The actual simulations are very crude, we could pretend to be fancy and call this a [Newton-Raphson](https://en.wikipedia.org/wiki/Newton%27s_method) implementation of solving a system of differential equations - but a fairer description is taking little steps in space according to the equation rules. With small enough steps, we get a decent simulation!
 
 ![An example of the project running, showing a strange attractor](images/example1.png)
